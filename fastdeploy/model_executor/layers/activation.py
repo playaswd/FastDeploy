@@ -18,10 +18,12 @@ from typing import Optional
 
 import paddle
 from paddle import nn
-from paddle.incubate.nn.functional import fused_bias_act, swiglu
 
 from fastdeploy.config import FDConfig
 from fastdeploy.platforms import current_platform
+
+if not current_platform.is_intel_hpu():
+    from paddle.incubate.nn.functional import fused_bias_act, swiglu
 
 
 class SiluAndMul(nn.Layer):
